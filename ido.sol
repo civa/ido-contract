@@ -221,5 +221,11 @@ contract Presale is ReentrancyGuard, Context, Ownable {
         require(endICO < block.timestamp, 'ICO should not be active');
         _;
     }
+    function withdrawTokens() public {
+         IERC20 tokenBEP = _token;
+          tokenBEP.transfer(msg.sender, (_contributions[msg.sender]));
+         _contributions[msg.sender] = 0;
+
     
+    }
 }
