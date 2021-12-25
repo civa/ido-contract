@@ -205,7 +205,7 @@ contract Presale is ReentrancyGuard, Context, Ownable {
         hardcap = value;
     }
     
-    function takeTokens(IERC20 tokenAddress) public onlyOwner{
+    function takeUnsoldTokens(IERC20 tokenAddress) public onlyOwner{
         IERC20 tokenBEP = tokenAddress;
         uint256 tokenAmt = tokenBEP.balanceOf(address(this));
         require(tokenAmt > 0, 'BEP-20 balance is 0');
