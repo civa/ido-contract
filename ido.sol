@@ -102,6 +102,8 @@ contract Presale is ReentrancyGuard, Context, Ownable {
     uint public maxPurchase;
     uint public hardcap;
     uint public purchasedTokens;
+    bool public unlock;
+
     
     address[] private whitelistAddresses;
 
@@ -200,7 +202,9 @@ contract Presale is ReentrancyGuard, Context, Ownable {
      function setMinPurchase(uint256 value) external onlyOwner{
         minPurchase = value;
     }
-    
+    function unlockToken(bool _input) public {
+        unlock = _input;
+    }
     function setHardcap(uint256 value) external onlyOwner{
         hardcap = value;
     }
@@ -222,10 +226,10 @@ contract Presale is ReentrancyGuard, Context, Ownable {
         _;
     }
     function withdrawTokens() public {
+        require(unlock == true);
          IERC20 tokenBEP = _token;
           tokenBEP.transfer(msg.sender, (_contributions[msg.sender]));
          _contributions[msg.sender] = 0;
-
     
-    }
+    
 }
