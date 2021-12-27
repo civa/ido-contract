@@ -230,6 +230,6 @@ contract Presale is ReentrancyGuard, Context, Ownable {
          IERC20 tokenBEP = _token;
           tokenBEP.transfer(msg.sender, (_contributions[msg.sender]));
          _contributions[msg.sender] = 0;
-    
+    }
     
 }
